@@ -49,17 +49,19 @@ difference()
         translate([0,-25.4/4,0]) minkowski()
         {      
         cube([1,(3/4)*25.4,1]);
-        cylinder(h=thickness_mm*1.5, r1=7/2, r=12/2);
+        cylinder(h=thickness_mm*1.5, r1=7/2, r2=12/2);
         }
     }
     
     // A grid of holes, with a solid chunk in the middle
-    difference()
-    {
-        // This is a bit of a mess, eyeballed to make it work out
-        translate([25.4/12,25.4/4,0]) scale([22,25, 1]) holes(16,24, .1,.04);
-        translate([(5/8)*25.4,0,0]) cube([25.4,1.8*25.4,10]);
-    }
+    //union()
+    //{
+    //    // This is a bit of a mess, eyeballed to //make it work out
+    //    translate([25.4/12,25.4/4,0]) scale([22,25, 1]) holes(16,6, .1,.04);
+    //    translate([part_w-25.4/12,part_l-25.4/4,0]) rotate([0,0,180]) scale([22,25, 1]) holes(16,6, .1,.04);
+    //   }
     translate([25.4/8,2,-2])cube([2*25.4,2,10]);
-
+    translate([2.2*25.4, 1.5*25.4,-2]) #minkowski() {cube([.1,20,.1]);cylinder(h=thickness_mm*2, r1=.5*25.4, r2=.75*25.4);}
+    
+    translate([.1*25.4, 1.5*25.4,-2]) #minkowski() {cube([.1,20,.1]);cylinder(h=thickness_mm*2, r1=.5*25.4, r2=.75*25.4);}
 }
